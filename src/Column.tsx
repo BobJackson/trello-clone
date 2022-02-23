@@ -1,22 +1,20 @@
 import {
     ColumnContainer,
-    ColumnTitle,
-    CardContainer
+    ColumnTitle
 } from "./style";
-import React from "react";
+import {Card} from "./Card";
 
 type ColumnPros = {
     text: string
-    children?: React.ReactNode
 }
 
 export const Column = ({text}: ColumnPros) => {
     return (
         <ColumnContainer>
             <ColumnTitle>{text}</ColumnTitle>
-            <CardContainer>Generate app scaffold</CardContainer>
-            <CardContainer>Learn TypeScript</CardContainer>
-            <CardContainer>Begin to use static typing</CardContainer>
+            <Card text="Generate app scaffold"/>
+            <Card text="Learn TypeScript"/>
+            <Card text="Begin to use static typing !"/>
         </ColumnContainer>
     )
 }
