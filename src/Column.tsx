@@ -3,9 +3,11 @@ import {
     ColumnTitle,
     CardContainer
 } from "./style";
+import React from "react";
 
 type ColumnPros = {
     text: string
+    children?: React.ReactNode
 }
 
 export const Column = ({text}: ColumnPros) => {
