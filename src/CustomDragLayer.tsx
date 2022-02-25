@@ -14,6 +14,7 @@ export const CustomDragLayer = () => {
             <Column
                 text={draggedItem.text}
                 id={draggedItem.id}
+                isPreview
             />
         </CustomDragLayerContainer>
     ) : null

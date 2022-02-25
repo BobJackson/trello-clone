@@ -15,9 +15,10 @@ import {isHidden} from "./utils/isHidden";
 type ColumnPros = {
     text: string
     id: string
+    isPreview?: boolean
 }
 
-export const Column = ({text, id}: ColumnPros) => {
+export const Column = ({text, id, isPreview}: ColumnPros) => {
     const {draggedItem, getTasksByListId, dispatch} = useAppState()
     const tasks = getTasksByListId(id)
     const ref = useRef<HTMLDivElement>(null)
@@ -43,8 +44,9 @@ export const Column = ({text, id}: ColumnPros) => {
 
     return (
         <ColumnContainer
+            isPreview={isPreview}
             ref={ref}
-            isHidden={isHidden(draggedItem, "COLUMN", id)}
+            isHidden={isHidden(draggedItem, "COLUMN", id, isPreview)}
         >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map((task) => (
