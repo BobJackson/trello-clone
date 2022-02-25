@@ -10,6 +10,7 @@ import {useRef} from "react";
 import {useItemDrag} from "./utils/useItemDrag";
 import {useDrop} from "react-dnd";
 import {throttle} from "throttle-debounce-ts";
+import {isHidden} from "./utils/isHidden";
 
 type ColumnPros = {
     text: string
@@ -41,7 +42,10 @@ export const Column = ({text, id}: ColumnPros) => {
     drag(drop(ref))
 
     return (
-        <ColumnContainer ref={ref}>
+        <ColumnContainer
+            ref={ref}
+            isHidden={isHidden(draggedItem, "COLUMN", id)}
+        >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map((task) => (
                 <Card text={task.text} id={task.id}/>
