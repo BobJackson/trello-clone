@@ -19,17 +19,6 @@ export type AppState = {
     draggedItem: DragItem | null
 }
 
-export const moveList = (
-    draggedId: string,
-    hoverId: string
-): Action => ({
-    type: "MOVE_LIST",
-    payload: {
-        draggedId,
-        hoverId
-    }
-})
-
 export const appStateReducer = (
     draft: AppState,
     action: Action
