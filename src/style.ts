@@ -18,8 +18,23 @@ interface DragPreviewContainerProps {
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
   transform: ${(props) =>
           props.isPreview ? "rotate(5deg)" : undefined};
-  opacity: ${(props => (props.isHidden ? 0.3 : 1))};
+  opacity: ${(props => (props.isHidden ? 0 : 1))};
 `
+
+type DragPreviewWrapperProps = {
+    position: {
+        x: number
+        y: number
+    }
+}
+
+export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
+    ({position: {x, y}}) => ({
+        style: {
+            transform: `translate(${x}px, ${y}px)`
+        }
+    })
+)<DragPreviewWrapperProps>``
 
 export const ColumnContainer = styled(DragPreviewContainer)`
   background-color: #ebecf0;
