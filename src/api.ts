@@ -1,7 +1,7 @@
 import {AppState} from "./state/appStateReducer";
 
 export const save = (payload: AppState) => {
-    return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT / save}`, {
+    return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/save`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -18,7 +18,7 @@ export const save = (payload: AppState) => {
 }
 
 export const load = () => {
-    return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT / load}`).then(
+    return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/load`).then(
         (response) => {
             if (response.ok) {
                 return response.json() as Promise<AppState>
