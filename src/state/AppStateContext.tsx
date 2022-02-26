@@ -1,4 +1,5 @@
-import {createContext, useContext, Dispatch, FC} from "react";
+import {createContext, useContext, useEffect, Dispatch, FC} from "react";
+import {save} from "../api";
 import {
     appStateReducer,
     AppState,
@@ -48,6 +49,9 @@ export const AppStateProvider: FC = ({children}) => {
     const getTasksByListId = (id: string) => {
         return lists.find((list) => list.id === id)?.tasks || []
     }
+    useEffect(() => {
+        save(state)
+    }, [state])
 
     return (
         <AppStateContext.Provider value={{draggedItem, lists, getTasksByListId, dispatch}}>
