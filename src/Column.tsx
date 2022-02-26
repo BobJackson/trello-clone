@@ -5,12 +5,12 @@ import {
 import {Card} from "./Card";
 import {AddNewItem} from "./AddNewItem";
 import {useAppState} from "./state/AppStateContext";
-import {addTask, moveList} from "./state/actions";
 import {useRef} from "react";
 import {useItemDrag} from "./utils/useItemDrag";
 import {useDrop} from "react-dnd";
 import {throttle} from "throttle-debounce-ts";
 import {isHidden} from "./utils/isHidden";
+import {addTask, moveList, moveTask, setDraggedItem} from "./state/actions";
 
 type ColumnPros = {
     text: string
@@ -23,7 +23,7 @@ export const Column = ({text, id, isPreview}: ColumnPros) => {
     const tasks = getTasksByListId(id)
     const ref = useRef<HTMLDivElement>(null)
     const [, drop] = useDrop({
-        accept: "COLUMN",
+        accept: ["COLUMN", "CARD"],
         hover: throttle(200, () => {
             if (!draggedItem) {
                 return
@@ -34,6 +34,18 @@ export const Column = ({text, id, isPreview}: ColumnPros) => {
                 }
 
                 dispatch(moveList(draggedItem.id, id))
+            } else {
+                if (draggedItem.columnId === id) {
+                    return
+                }
+                if (tasks.length) {
+                    return
+                }
+
+                dispatch(
+                    moveTask(draggedItem.id, null, draggedItem.columnId, id)
+                )
+                dispatch(setDraggedItem({...draggedItem, columnId: id}))
             }
         })
     })
