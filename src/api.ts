@@ -5,7 +5,7 @@ export const save = (payload: AppState) => {
         method: "POST",
         headers: {
             Accept: "application/json",
-            "Context-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
     }).then((response) => {
